@@ -39,12 +39,11 @@ if prompt := st.chat_input("Ask any question from this PDF..."):
             genai.configure(api_key=api_key)
             model = genai.GenerativeModel("gemini-3.6-flash")
 
-            full_prompt = f"Context from PDF:\n{pdf_text}\n\nQuestion:\n{prompt}\n\nAnswer strictly using the provided context."
+            full_prompt = f"Context from document:\n{pdf_text}\n\nQuestion: {prompt}\n\nPlease answer accurately using only the above context."
 
             with st.chat_message("assistant"):
-                with st.spinner("Thinking..."):
-                    response = model.generate_content(full_prompt)
-                    st.markdown(response.text)
-                    st.session_state.messages.append({"role": "assistant", "content": response.text})
+                response = model.generate_content(full_prompt, stream=True)
+                full_res = st.write_stream(chunk.text for chunk in response)
+                st.session_state.messages.append({"role": "assistant", "content": full_res})
         except Exception as e:
             st.error(f"Error: {e}")
