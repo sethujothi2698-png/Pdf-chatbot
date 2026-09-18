@@ -37,7 +37,7 @@ if prompt := st.chat_input("Ask any question from this PDF..."):
 
         try:
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("gemini-2.5-flash")
+            model = genai.GenerativeModel("gemini-3.6-flash")
 
             full_prompt = f"Context from PDF:\n{pdf_text}\n\nQuestion:\n{prompt}\n\nAnswer strictly using the provided context."
 
