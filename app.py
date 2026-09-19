@@ -3,7 +3,7 @@ from pypdf import PdfReader
 import google.generativeai as genai
 
 st.set_page_config(page_title="PDF Chatbot", page_icon="📄", layout="centered")
-st.title("📄 Chat with your PDF")
+st.title("📄 Pdf Joebot")
 
 # Streamlit secrets-la irundhu automatic-a key edukkum
 api_key = st.secrets.get("GEMINI_API_KEY", "")
